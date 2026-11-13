@@ -1,0 +1,12 @@
+apiVersion: solution.sap/v1
+kind: Solution
+
+metadata:
+  name: payslip-translation-cd9de
+  version: "1.0.0"
+  description: "AI agent that translates payslip pay codes into all major European languages, enabling employee self-service and reducing HR Ops effort from hours to minutes."
+
+assets:
+  - ref: ./assets/payslip-translation-agent/asset.yaml
+  - ref: ./assets/sap-sf-ecemployeecentralpayroll-mcp-server/asset.yaml
+  - ref: ./assets/sap-sf-eccompensationinformation-mcp-server/asset.yaml

@@ -1,0 +1,21 @@
+apiVersion: asset.sap/v1
+kind: Asset
+type: mcp-server
+
+metadata:
+  name: sap-sf-ecemployeecentralpayroll-mcp-server
+  description: Exposes SAP SuccessFactors Employee Central Payroll run results as read-only MCP tools for payslip data retrieval.
+  version: "1.0.0"
+  translation: mcp-translation/translation.json
+  apiSpec: mcp-translation/api-spec.edmx
+
+requires:
+  - name: ECEmployeeCentralPayroll
+    kind: api
+    ordId: sap.sf:apiResource:ECEmployeeCentralPayroll:v1
+
+provides:
+  apis:
+    - name: sap-sf-ecemployeecentralpayroll-mcp-server
+      kind: mcp-server
+      ordId: customer.build:apiResource:payslip-translation-cd9de.sap-sf-ecemployeecentralpayroll-mcp-server:v1

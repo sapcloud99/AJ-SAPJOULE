@@ -1,0 +1,357 @@
+{
+  "servers": {
+    "sap-sf-ecemployeecentralpayroll": {
+      "mcp_server_name": "sap.mcp/sfodata",
+      "description": "SAP SuccessFactors Employee Central Payroll run results — provides payslip pay codes and amounts per employee per pay period.",
+      "tools": {
+        "get_metadata_sfodata": {
+          "description": "Retrieve OData service metadata for schema discovery.",
+          "input_schema": {
+            "type": "object",
+            "properties": {},
+            "required": []
+          },
+          "mock_response": {
+            "value": "<edmx:Edmx Version=\"1.0\"><edmx:DataServices><Schema Namespace=\"SFOData\"></Schema></edmx:DataServices></edmx:Edmx>"
+          }
+        },
+        "batch_for_sfodata": {
+          "description": "Execute a batch OData request.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "requests": { "type": "array", "description": "Array of batch requests" }
+            },
+            "required": []
+          },
+          "mock_response": { "responses": [] }
+        },
+        "list_employeepayrollrunresults_for_sfodata": {
+          "description": "List payroll run result headers for an employee.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$filter": { "type": "string", "description": "OData filter expression" },
+              "$top": { "type": "string", "description": "Maximum number of results" },
+              "$select": { "type": "string", "description": "Fields to return" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "externalCode": "EMP001-2025-01",
+                "employeeId": "EMP001",
+                "payPeriodStartDate": "/Date(1735689600000)/",
+                "payPeriodEndDate": "/Date(1738367999000)/",
+                "payDate": "/Date(1738454400000)/",
+                "grossPay": "4500.00",
+                "netPay": "3102.50",
+                "currency": "EUR",
+                "companyCode": "DE01"
+              },
+              {
+                "externalCode": "EMP001-2025-02",
+                "employeeId": "EMP001",
+                "payPeriodStartDate": "/Date(1738368000000)/",
+                "payPeriodEndDate": "/Date(1740787199000)/",
+                "payDate": "/Date(1740873600000)/",
+                "grossPay": "4500.00",
+                "netPay": "3095.00",
+                "currency": "EUR",
+                "companyCode": "DE01"
+              }
+            ]
+          }
+        },
+        "get_employeepayrollrunresults_for_sfodata": {
+          "description": "Get a specific payroll run result header by key.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "externalCode": { "type": "string", "description": "Payroll run result external code" }
+            },
+            "required": ["externalCode"]
+          },
+          "mock_response": {
+            "externalCode": "EMP001-2025-01",
+            "employeeId": "EMP001",
+            "payPeriodStartDate": "/Date(1735689600000)/",
+            "payPeriodEndDate": "/Date(1738367999000)/",
+            "payDate": "/Date(1738454400000)/",
+            "grossPay": "4500.00",
+            "netPay": "3102.50",
+            "currency": "EUR",
+            "companyCode": "DE01"
+          }
+        },
+        "count_employeepayrollrunresults_for_sfodata": {
+          "description": "Count payroll run results.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "value": 2 }
+        },
+        "list_employeepayrollrunresultsitems_for_sfodata": {
+          "description": "List payroll run result line items (pay codes) for an employee.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$filter": { "type": "string", "description": "OData filter expression" },
+              "$top": { "type": "string", "description": "Maximum number of results" },
+              "$select": { "type": "string", "description": "Fields to return" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "externalCode": "EMP001-2025-01-GRUNDGEHALT",
+                "payrollRunResultExternalCode": "EMP001-2025-01",
+                "payComponent": "GRUNDGEHALT",
+                "payComponentName": "Grundgehalt",
+                "payComponentType": "EARNING",
+                "amount": "4500.00",
+                "currency": "EUR",
+                "hours": null,
+                "units": null
+              },
+              {
+                "externalCode": "EMP001-2025-01-LST-KL-IV",
+                "payrollRunResultExternalCode": "EMP001-2025-01",
+                "payComponent": "LST_KL_IV",
+                "payComponentName": "Lohnsteuer Klasse IV",
+                "payComponentType": "DEDUCTION",
+                "amount": "-580.00",
+                "currency": "EUR",
+                "hours": null,
+                "units": null
+              },
+              {
+                "externalCode": "EMP001-2025-01-KV-AN",
+                "payrollRunResultExternalCode": "EMP001-2025-01",
+                "payComponent": "KV_AN",
+                "payComponentName": "Krankenversicherung Arbeitnehmer",
+                "payComponentType": "DEDUCTION",
+                "amount": "-319.50",
+                "currency": "EUR",
+                "hours": null,
+                "units": null
+              },
+              {
+                "externalCode": "EMP001-2025-01-RV-AN",
+                "payrollRunResultExternalCode": "EMP001-2025-01",
+                "payComponent": "RV_AN",
+                "payComponentName": "Rentenversicherung Arbeitnehmer",
+                "payComponentType": "DEDUCTION",
+                "amount": "-418.50",
+                "currency": "EUR",
+                "hours": null,
+                "units": null
+              },
+              {
+                "externalCode": "EMP001-2025-01-PV-AN",
+                "payrollRunResultExternalCode": "EMP001-2025-01",
+                "payComponent": "PV_AN",
+                "payComponentName": "Pflegeversicherung Arbeitnehmer",
+                "payComponentType": "DEDUCTION",
+                "amount": "-79.50",
+                "currency": "EUR",
+                "hours": null,
+                "units": null
+              }
+            ]
+          }
+        },
+        "get_employeepayrollrunresultsitems_for_sfodata": {
+          "description": "Get a specific payroll run result line item by key.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "externalCode": { "type": "string", "description": "Line item external code" }
+            },
+            "required": ["externalCode"]
+          },
+          "mock_response": {
+            "externalCode": "EMP001-2025-01-GRUNDGEHALT",
+            "payrollRunResultExternalCode": "EMP001-2025-01",
+            "payComponent": "GRUNDGEHALT",
+            "payComponentName": "Grundgehalt",
+            "payComponentType": "EARNING",
+            "amount": "4500.00",
+            "currency": "EUR"
+          }
+        },
+        "count_employeepayrollrunresultsitems_for_sfodata": {
+          "description": "Count payroll run result line items.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "value": 5 }
+        },
+        "list": {
+          "description": "List payroll entities.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": { "results": [] }
+        },
+        "count": {
+          "description": "Count payroll entities.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "value": 0 }
+        }
+      }
+    },
+    "sap-sf-eccompensationinformation": {
+      "mcp_server_name": "sap.mcp/sfodata",
+      "description": "SAP SuccessFactors Employee Central Compensation Information — provides recurring/non-recurring deductions and pay component data.",
+      "tools": {
+        "get_metadata_sfodata": {
+          "description": "Retrieve OData service metadata for schema discovery.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": {
+            "value": "<edmx:Edmx Version=\"1.0\"><edmx:DataServices><Schema Namespace=\"SFOData\"></Schema></edmx:DataServices></edmx:Edmx>"
+          }
+        },
+        "batch_for_sfodata": {
+          "description": "Execute a batch OData request.",
+          "input_schema": { "type": "object", "properties": { "requests": { "type": "array" } }, "required": [] },
+          "mock_response": { "responses": [] }
+        },
+        "list_onetimededuction_for_sfodata": {
+          "description": "List one-time deductions for an employee.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$filter": { "type": "string", "description": "OData filter expression" },
+              "$top": { "type": "string", "description": "Maximum number of results" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "userId": "EMP001",
+                "deductionType": "ADVANCE_REPAYMENT",
+                "deductionTypeName": "Advance Repayment",
+                "amount": "200.00",
+                "currency": "EUR",
+                "startDate": "/Date(1735689600000)/"
+              }
+            ]
+          }
+        },
+        "get_onetimededuction_for_sfodata": {
+          "description": "Get a specific one-time deduction.",
+          "input_schema": { "type": "object", "properties": { "userId": { "type": "string" } }, "required": ["userId"] },
+          "mock_response": { "userId": "EMP001", "deductionType": "ADVANCE_REPAYMENT", "amount": "200.00", "currency": "EUR" }
+        },
+        "count_onetimededuction_for_sfodata": {
+          "description": "Count one-time deductions.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "value": 1 }
+        },
+        "list_recurringdeductionitem_for_sfodata": {
+          "description": "List recurring deduction items for an employee.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "$filter": { "type": "string" }, "$top": { "type": "string" } },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "userId": "EMP001",
+                "deductionType": "COMPANY_CAR",
+                "deductionTypeName": "Company Car Benefit",
+                "amount": "150.00",
+                "currency": "EUR",
+                "frequency": "MONTHLY"
+              }
+            ]
+          }
+        },
+        "get_recurringdeductionitem_for_sfodata": {
+          "description": "Get a specific recurring deduction item.",
+          "input_schema": { "type": "object", "properties": { "userId": { "type": "string" } }, "required": ["userId"] },
+          "mock_response": { "userId": "EMP001", "deductionType": "COMPANY_CAR", "amount": "150.00", "currency": "EUR" }
+        },
+        "count_recurringdeductionitem_for_sfodata": {
+          "description": "Count recurring deduction items.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "value": 1 }
+        },
+        "list_empcompensationcalculated_for_sfodata": {
+          "description": "List calculated compensation data for an employee.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "$filter": { "type": "string" }, "$top": { "type": "string" } },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "userId": "EMP001",
+                "payGrade": "G08",
+                "payGradeName": "Senior Engineer",
+                "payScale": "TECH",
+                "baseSalary": "54000.00",
+                "currency": "EUR",
+                "effectiveDate": "/Date(1672531200000)/"
+              }
+            ]
+          }
+        },
+        "get_empcompensationcalculated_for_sfodata": {
+          "description": "Get calculated compensation data for a specific employee.",
+          "input_schema": { "type": "object", "properties": { "userId": { "type": "string" } }, "required": ["userId"] },
+          "mock_response": { "userId": "EMP001", "payGrade": "G08", "baseSalary": "54000.00", "currency": "EUR" }
+        },
+        "count_empcompensationcalculated_for_sfodata": {
+          "description": "Count calculated compensation records.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "value": 1 }
+        },
+        "list_emppaycomprecurring_for_sfodata": {
+          "description": "List recurring pay components for an employee.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "$filter": { "type": "string" }, "$top": { "type": "string" } },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "userId": "EMP001",
+                "payComponent": "URLAUBSGELD",
+                "payComponentName": "Urlaubsgeld",
+                "amount": "1800.00",
+                "currency": "EUR",
+                "frequency": "ANNUAL",
+                "startDate": "/Date(1672531200000)/"
+              }
+            ]
+          }
+        },
+        "get_emppaycomprecurring_for_sfodata": {
+          "description": "Get a specific recurring pay component.",
+          "input_schema": { "type": "object", "properties": { "userId": { "type": "string" } }, "required": ["userId"] },
+          "mock_response": { "userId": "EMP001", "payComponent": "URLAUBSGELD", "amount": "1800.00", "currency": "EUR" }
+        },
+        "count_emppaycomprecurring_for_sfodata": {
+          "description": "Count recurring pay components.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "value": 1 }
+        }
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "created_for_agent": "payslip-translation-agent",
+    "mock_mode": true,
+    "deterministic": true,
+    "total_servers": 2,
+    "total_tools": 24,
+    "generated_from": [
+      "assets/sap-sf-ecemployeecentralpayroll-mcp-server/mcp-translation/translation.json",
+      "assets/sap-sf-eccompensationinformation-mcp-server/mcp-translation/translation.json"
+    ],
+    "generation_date": "2026-11-13"
+  }
+}
